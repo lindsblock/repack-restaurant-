@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import Home from './components/Home';
+import About from './components/About';
+import NoMatch from './components/NoMatch';
+import NavBar from './components/NavBar';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import Item from './components/Item';
+import ProtectedRoute from './components/ProtectedRoute';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div>
+    <NavBar/>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/about" component={About} />
+      <Route component={NoMatch} />
+      <Route path="/login" component={Login} />
+      <ProtectedRoute path="/dashboard" component={Dashboard} />
+      <ProtectedRoute path="/items/:id" component={Item}/>
+    </Switch>
+  </div>
+);
 
 export default App;
